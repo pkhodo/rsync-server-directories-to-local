@@ -255,9 +255,37 @@ Then reload: `source ~/.zshrc`
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
+## Use Cases
+
+- **Development**: Sync production data to local environment for testing
+- **Backup**: Keep local copies of important server directories
+- **Content Management**: Sync uploaded files from production to local
+- **Database Files**: Sync database dumps or data files
+- **Media Assets**: Sync images, videos, or other media files
+
+## Why This Tool?
+
+- ✅ **Safe by default**: Dry-run mode prevents accidental changes
+- ✅ **Simple configuration**: One file to configure all folder mappings
+- ✅ **No dependencies**: Just bash and rsync (usually pre-installed)
+- ✅ **Cross-platform**: Works on macOS and Linux
+- ✅ **Well documented**: Comprehensive README and troubleshooting guide
+- ✅ **Protected files**: Automatically excludes common development files
+
+## Alternatives
+
+If you need bidirectional sync, consider:
+- [rsync](https://rsync.samba.org/) - Manual bidirectional sync
+- [rclone](https://rclone.org/) - Cloud storage sync tool
+- [syncthing](https://syncthing.net/) - Continuous file synchronization
+
+This tool is specifically designed for **one-way server-to-local** sync with safety features built-in.
+
 ## Contributing
 
 Found a bug or have a suggestion? Please open an issue or submit a pull request!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
 
 ## Disclaimer
 

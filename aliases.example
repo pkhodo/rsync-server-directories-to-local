@@ -1,0 +1,107 @@
+# Example Shell Aliases and Helper Functions
+#
+# Copy these to your ~/.zshrc or ~/.bashrc (or ~/.bash_profile on macOS)
+# Then update the SCRIPT_PATH variable to point to your sync.sh location
+#
+# After adding, reload your shell config:
+#   source ~/.zshrc
+#   # or
+#   source ~/.bashrc
+
+# ============================================================================
+# CONFIGURATION - Update this path!
+# ============================================================================
+SCRIPT_PATH="/path/to/rsync-server-directories-to-local/sync.sh"
+
+# ============================================================================
+# BASIC ALIASES
+# ============================================================================
+
+# Dry-run sync (safe preview mode - default)
+alias syncserver='$SCRIPT_PATH'
+
+# Actual sync (when you're ready to commit)
+alias syncserverreal='SYNC_DRY_RUN=0 $SCRIPT_PATH'
+
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+# Kill switch - stops a running sync
+killsyncserver() {
+  local LOCK_FILE="/tmp/sync-server-to-local.lock"
+  if [ -f "$LOCK_FILE" ]; then
+    local PID=$(cat "$LOCK_FILE" 2>/dev/null)
+    if [ -n "$PID" ] && ps -p "$PID" > /dev/null 2>&1; then
+      echo "🛑 Killing sync process (PID: $PID)..."
+      pkill -P "$PID" 2>/dev/null
+      kill "$PID" 2>/dev/null
+      sleep 1
+      # Force kill if still running
+      ps -p "$PID" > /dev/null 2>&1 && kill -9 "$PID" 2>/dev/null
+      rm -f "$LOCK_FILE"
+      echo "✓ Sync stopped"
+    else
+      echo "⚠️  Lock file exists but process not running. Cleaning up..."
+      rm -f "$LOCK_FILE"
+    fi
+  else
+    echo "ℹ️  No sync running (no lock file found)"
+  fi
+}
+
+# Status check - see if sync is running and view progress
+syncserverstatus() {
+  local LOCK_FILE="/tmp/sync-server-to-local.lock"
+  local LOG_DIR="${HOME}/Library/Logs/sync-server-to-local"
+  # Fallback for Linux
+  [ ! -d "$LOG_DIR" ] && LOG_DIR="${HOME}/.local/logs/sync-server-to-local"
+  
+  echo "📊 Sync Status"
+  echo "════════════════════════════════════════"
+  
+  # Check if running
+  if [ -f "$LOCK_FILE" ]; then
+    local PID=$(cat "$LOCK_FILE" 2>/dev/null)
+    if [ -n "$PID" ] && ps -p "$PID" > /dev/null 2>&1; then
+      echo "🟢 Status: RUNNING (PID: $PID)"
+      echo ""
+      
+      # Show recent log activity
+      local LATEST_LOG=$(ls -t "$LOG_DIR"/sync-*.log 2>/dev/null | head -1)
+      if [ -n "$LATEST_LOG" ]; then
+        echo "📝 Latest activity from log:"
+        echo "────────────────────────────────────────"
+        tail -5 "$LATEST_LOG" | grep -E "(Syncing|Transferring|xfer#|deleting)" | tail -3 || tail -3 "$LATEST_LOG"
+        echo ""
+        echo "📄 Full log: $LATEST_LOG"
+        echo "   (Use 'tail -f $LATEST_LOG' to watch live)"
+      fi
+      
+      # Show rsync processes
+      local RSYNC_COUNT=$(ps aux | grep -E "rsync.*server" | grep -v grep | wc -l | tr -d ' ')
+      if [ "$RSYNC_COUNT" -gt 0 ]; then
+        echo ""
+        echo "🔄 Active rsync processes: $RSYNC_COUNT"
+      fi
+    else
+      echo "🔴 Status: NOT RUNNING (stale lock file)"
+      rm -f "$LOCK_FILE"
+    fi
+  else
+    echo "🔴 Status: NOT RUNNING"
+  fi
+  
+  echo ""
+  echo "💡 Tip: Use 'killsyncserver' to stop a running sync"
+}
+
+# Quick diff check - preview what would be synced
+syncserverdiff() {
+  echo "🔍 Checking file differences (this may take a while)..."
+  echo ""
+  SYNC_DRY_RUN=1 "$SCRIPT_PATH" 2>&1 | grep -E "(would be|deleting|sending|receiving)" | head -20
+  echo ""
+  echo "💡 Run 'syncserver' for full dry-run output"
+}
+

@@ -102,6 +102,29 @@ SYNC_DRY_RUN=0 ./sync.sh
 
 You'll be prompted for your SSH password once (even if syncing multiple folders - we're not sadists).
 
+### Optional: Set Up Aliases
+
+Want to make your life easier? We've included example aliases and helper functions! 
+
+Copy `aliases.example` to your shell config and customize it:
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+cat aliases.example >> ~/.zshrc
+
+# Edit the SCRIPT_PATH variable in the file, then reload:
+source ~/.zshrc
+```
+
+This gives you convenient commands like:
+- `syncserver` - Dry-run sync (safe preview)
+- `syncserverreal` - Actual sync
+- `syncserverstatus` - Check if sync is running and see progress
+- `killsyncserver` - Stop a running sync
+- `syncserverdiff` - Quick preview of file differences
+
+*Because typing long paths is so 2020.*
+
 ## Installation Script
 
 Want to skip the manual setup? We've got you covered:

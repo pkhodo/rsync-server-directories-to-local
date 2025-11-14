@@ -26,8 +26,8 @@ A simple, safe bash script for syncing specific folders from a remote server to 
 ### 1. Clone or Download
 
 ```bash
-git clone https://github.com/yourusername/rsync-server-to-local-public.git
-cd rsync-server-to-local-public
+git clone https://github.com/pkhodo/rsync-server-directories-to-local.git
+cd rsync-server-directories-to-local
 ```
 
 ### 2. Configure Server Connection
@@ -44,7 +44,7 @@ REMOTE_BASE="/path/to/docs"                # Base path on server
 Copy the example config and edit it:
 
 ```bash
-cp sync-config.txt sync-config.txt.example  # Backup example
+cp sync-config.txt.example sync-config.txt
 # Edit sync-config.txt with your actual paths
 ```
 
@@ -180,10 +180,10 @@ Add to your `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 # Dry-run (default)
-alias syncserver='cd /path/to/rsync-server-to-local-public && ./sync.sh'
+alias syncserver='cd /path/to/rsync-server-directories-to-local && ./sync.sh'
 
 # Actual sync
-alias syncserver-now='cd /path/to/rsync-server-to-local-public && SYNC_DRY_RUN=0 ./sync.sh'
+alias syncserver-now='cd /path/to/rsync-server-directories-to-local && SYNC_DRY_RUN=0 ./sync.sh'
 ```
 
 Then reload: `source ~/.zshrc`

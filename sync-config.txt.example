@@ -1,0 +1,21 @@
+# Sync Configuration
+# Format: remote_folder|local_destination
+# One folder mapping per line
+# Lines starting with # are ignored
+#
+# Remote folders are relative to REMOTE_BASE on the server
+# (e.g., "backups" means REMOTE_BASE/backups on server)
+#
+# Copy this file to sync-config.txt and update with your actual paths:
+#   cp sync-config.txt.example sync-config.txt
+#
+# Examples:
+# Simple folder sync
+backups|/Users/username/local/backups
+
+# Nested folder sync
+import|/Users/username/local/import
+
+# Deep nested path
+web/sites/default/files|/Users/username/local/web/sites/default/files
+

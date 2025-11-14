@@ -1,0 +1,15 @@
+# Ignore the actual config file (users should copy from .example)
+sync-config.txt
+
+# Ignore any local test files
+*.log
+*.tmp
+
+# macOS
+.DS_Store
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo

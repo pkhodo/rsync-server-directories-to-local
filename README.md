@@ -1,8 +1,8 @@
-# Simple Server Sync Script
+# Server Sync Tool
 
-**One-way sync from server to local. Manual execution only.**
+**A simple, safe bash script for one-way syncing directories from a remote server to your local machine using rsync over SSH.**
 
-A simple, safe bash script for syncing specific folders from a remote server to your local machine using rsync over SSH. Perfect for keeping local development environments in sync with production or staging servers.
+Perfect for keeping local development environments in sync with production or staging servers.
 
 ## Features
 

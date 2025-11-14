@@ -1,9 +1,11 @@
 #!/bin/bash
+# Server Sync Tool
+# Version: 1.0.0
 # Simple one-way sync from server to local
 # Manual execution only - reads from sync-config.txt
 # SAFETY: Only reads from server, never writes to server
 #
-# IMPORTANT: Run this script from your LOCAL Mac, NOT from the server!
+# IMPORTANT: Run this script from your LOCAL machine, NOT from the server!
 # The script connects TO the server to sync files FROM server TO your local machine.
 
 set -euo pipefail
@@ -11,7 +13,7 @@ set -euo pipefail
 # Safety check: Make sure we're not running on the server
 # (This is a basic check - you may want to customize the hostname pattern)
 if [ -f /.dockerenv ] || ([ -n "${SSH_CONNECTION:-}" ] && [ -n "${SERVER:-}" ] && hostname | grep -q "$(echo "$SERVER" | cut -d'@' -f2 | cut -d'.' -f1)"); then
-    echo "ERROR: This script must be run from your LOCAL Mac, not from the server!"
+    echo "ERROR: This script must be run from your LOCAL machine, not from the server!"
     echo ""
     echo "If you're currently SSH'd into the server, exit first:"
     echo "  exit"

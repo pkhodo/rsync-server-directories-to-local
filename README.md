@@ -9,6 +9,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/pkhodo/rsync-server-directories-to-local/releases)
 [![Shell Script](https://img.shields.io/badge/shell-bash-green.svg)](https://www.gnu.org/software/bash/)
+[![GitHub stars](https://img.shields.io/github/stars/pkhodo/rsync-server-directories-to-local?style=social)](https://github.com/pkhodo/rsync-server-directories-to-local/stargazers)
 [![Stars](https://img.shields.io/github/stars/pkhodo/rsync-server-directories-to-local?style=social)](https://github.com/pkhodo/rsync-server-directories-to-local)
 
 Perfect for keeping local development environments in sync with production or staging servers.

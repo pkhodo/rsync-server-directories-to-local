@@ -1,8 +1,18 @@
 # Server Sync Tool
 
+<div align="center">
+
 **A simple, safe bash script for one-way syncing directories from a remote server to your local machine using rsync over SSH.**
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/pkhodo/rsync-server-directories-to-local/releases)
+[![Shell Script](https://img.shields.io/badge/shell-bash-green.svg)](https://www.gnu.org/software/bash/)
+
 Perfect for keeping local development environments in sync with production or staging servers.
+
+[Quick Start](#quick-start) • [Features](#features) • [Documentation](#configuration) • [Contributing](./CONTRIBUTING.md)
+
+</div>
 
 ## Features
 
